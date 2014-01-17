@@ -1,7 +1,0 @@
-{
-  "sources": {
-    "develop": {
-      "path": "./site-cookbooks/develop"
-    }
-  }
-}
