@@ -7,26 +7,15 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.box = "centos65"
-
-  config.berkshelf.berksfile_path = "./recipes/Berksfile"
-  config.berkshelf.enabled = true
+  config.vm.network :forwarded_port, guest: 80, host: 80
   config.omnibus.chef_version = :latest
 
-  config.vm.provision :chef_solo do |chef|
-      chef.cookbooks_path = "./recipes"
-      chef.run_list = [
-          "mysql::client",
-          "mysql::server",
-          "develop"
-      ]
+  config.vm.provider :virtualbox do |vb|
+      vb.customize ["modifyvm", :id, "--memory", 1024]
+  end
 
-      chef.json = {
-        mysql: {
-          server_root_password: "asdf1234",
-          server_repl_password: "asdf1234",
-          server_debian_password: "asdf1234",
-          bind_address: "127.0.0.1"
-        }
-      }
+  config.vm.provision :chef_solo do |chef|
+      chef.cookbooks_path = "cookbooks"
+      chef.add_recipe("basis")
   end
 end
