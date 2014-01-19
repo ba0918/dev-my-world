@@ -21,20 +21,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.add_recipe("yum")
     chef.add_recipe("ruby")
     chef.add_recipe("nodejs")
-    #chef.add_recipe("phpenv")
     chef.json = {
-      :nodejs => {
-        :current  => "0.10.24",
-        :versions => [
-          "0.10.24"
-        ],
-        :packages => [
-          {:name => "coffee-script", :command => "coffee"},
-          {:name => "typescript",    :command => "tsc"},
-          {:name => "grunt-cli",     :command => "grunt"}
-        ]
-      },
-
       :php_global_version    => "5.5.8",
       :php_configure_options => "",
       :php => [
