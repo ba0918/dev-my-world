@@ -7,6 +7,7 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.box = "centos65"
+  config.vm.synced_folder "../public", "/share", :create => true, :owner => 'vagrant', :group => 'vagrant'
   config.vm.network :forwarded_port, guest: 80, host: 80
   config.omnibus.chef_version = :latest
 
@@ -25,6 +26,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         :current  => "0.10.24",
         :versions => [
           "0.10.24"
+        ],
+        :packages => [
+          {:name => "coffee-script", :command => "coffee"},
+          {:name => "typescript",    :command => "tsc"},
+          {:name => "grunt-cli", :command => "grunt"}
         ]
       },
 
