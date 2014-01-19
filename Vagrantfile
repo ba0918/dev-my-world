@@ -19,6 +19,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.cookbooks_path = "cookbooks"
     chef.add_recipe("basis")
     chef.add_recipe("yum")
+    chef.add_recipe("ruby")
     chef.add_recipe("nodejs")
     #chef.add_recipe("phpenv")
     chef.json = {
