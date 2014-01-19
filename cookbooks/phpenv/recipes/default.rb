@@ -1,10 +1,8 @@
-
 %w{mysql-devel mhash mhash-devel re2c libmcrypt libmcrypt-devel libxml2-devel bison bison-devel openssl-devel curl-devel libjpeg-devel libpng-devel libmcrypt-devel readline-devel libtidy-devel libxslt-devel httpd-devel enchant-devel libXpm libXpm-devel freetype-devel t1lib t1lib-devel gmp-devel libc-client-devel libicu-devel oniguruma-devel net-snmp net-snmp-devel bzip2-devel}.each do |name|
   package name do
     action :install
   end
 end
-
 
 bash "install phpenv and phpbuild" do
     cwd "/home/vagrant"
@@ -24,7 +22,6 @@ bash "install phpenv and phpbuild" do
     EOH
 end
 
-
 node[:php].each do |php|
     version = php["version"]
     dir     = "/home/vagrant/.phpenv/versions/" + php["version"]
@@ -40,7 +37,6 @@ node[:php].each do |php|
         creates dir
     end
 end
-
 
 execute "set phpenv global" do
     user "vagrant"
