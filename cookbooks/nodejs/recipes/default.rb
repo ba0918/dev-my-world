@@ -31,3 +31,12 @@ bash "set node.js global version " + node[:nodejs][:current] do
     EOC
     not_if "nvm current | grep #{node[:nodejs][:current]}"
 end
+
+
+node[:nodejs][:packages].each do |pkg|
+    execute "install npm package #{pkg[:name]}" do
+        cwd     "/usr/local/nvm/v#{node[:nodejs][:current]}/bin"
+        command "npm install -g #{pkg[:name]}"
+        not_if  "which #{pkg[:command]}"
+    end
+end

@@ -30,7 +30,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         :packages => [
           {:name => "coffee-script", :command => "coffee"},
           {:name => "typescript",    :command => "tsc"},
-          {:name => "grunt-cli", :command => "grunt"}
+          {:name => "grunt-cli",     :command => "grunt"}
         ]
       },
 
