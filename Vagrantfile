@@ -7,7 +7,7 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.box = "centos65"
-  config.vm.synced_folder "../public", "/share", :create => true, :owner => 'vagrant', :group => 'vagrant'
+  config.vm.synced_folder "./public", "/share", :create => true, :owner => 'vagrant', :group => 'vagrant'
   config.vm.network :forwarded_port, guest: 80, host: 80
   config.omnibus.chef_version = :latest
 
