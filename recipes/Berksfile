@@ -1,3 +1,0 @@
-site :opscode
-cookbook "mysql"
-cookbook "develop", path: "site-cookbooks/develop"
