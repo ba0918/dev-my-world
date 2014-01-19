@@ -35,8 +35,7 @@ end
 
 node[:nodejs][:packages].each do |pkg|
     execute "install npm package #{pkg[:name]}" do
-        cwd     "/usr/local/nvm/v#{node[:nodejs][:current]}/bin"
-        command "npm install -g #{pkg[:name]}"
+        command "/usr/local/nvm/v#{node[:nodejs][:current]}/bin/npm install -g #{pkg[:name]}"
         not_if  "which #{pkg[:command]}"
     end
 end

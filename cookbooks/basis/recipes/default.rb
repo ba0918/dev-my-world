@@ -4,7 +4,7 @@ service "iptables" do
 end
 
 
-%w{wget vim zsh}.each do |name|
+%w{wget vim zsh openssl-devel}.each do |name|
     package name do
         action :install
     end
