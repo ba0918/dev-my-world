@@ -15,7 +15,7 @@ end
 node[:rbenv][:versions].each do |version|
     bash "install ruby #{version}" do
         code <<-EOC
-            export export RBENV_ROOT="#{node[:rbenv][:base_dir]}"
+            export RBENV_ROOT="#{node[:rbenv][:base_dir]}"
             export PATH="#{node[:rbenv][:base_dir]}/bin:$PATH"
             eval "$(rbenv init -)"
             #{node[:rbenv][:base_dir]}/bin/rbenv install #{version}
@@ -24,7 +24,12 @@ node[:rbenv][:versions].each do |version|
     end
 end
 
-execute "set ruby global version #{node[:rbenv][:global_version]}" do
-    command "#{node[:rbenv][:base_dir]}/bin/rbenv global #{node[:rbenv][:global_version]}"
+bash "set ruby global version #{node[:rbenv][:global_version]}" do
+    code <<-EOC
+        export RBENV_ROOT="#{node[:rbenv][:base_dir]}"
+        export PATH="#{node[:rbenv][:base_dir]}/bin:$PATH"
+        eval "$(rbenv init -)"
+        #{node[:rbenv][:base_dir]}/bin/rbenv global #{node[:rbenv][:global_version]}
+    EOC
     not_if  "#{node[:rbenv][:base_dir]}/bin/rbenv global | grep #{node[:rbenv][:global_version]}"
 end
