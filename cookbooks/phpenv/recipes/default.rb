@@ -8,9 +8,9 @@ bash "install phpenv and phpbuild" do
     code <<-EOC
         export PHPENV_ROOT=#{node[:php][:base_dir]}
         curl https://raw.github.com/CHH/phpenv/master/bin/phpenv-install.sh | sh
-        git clone git://github.com/CHH/php-build.git #{node[:php][:base_dir]}/plugins/php-build
-        echo 'export PHPENV_ROOT=#{node[:php][:base_dir]}' >> /etc/profile.d/rbenv.sh
-        echo 'export PATH=#{node[:php][:base_dir]}/bin:$PATH # Add phpenv to PATH for scripting' >> /etc/profile.d/rbenv.sh
+        git clone https://github.com/CHH/php-build #{node[:php][:base_dir]}/plugins/php-build
+        echo 'export PHPENV_ROOT="#{node[:php][:base_dir]}"' >> /etc/profile.d/rbenv.sh
+        echo 'export PATH="#{node[:php][:base_dir]}/bin:$PATH"' >> /etc/profile.d/rbenv.sh
         echo 'eval \"$(phpenv init -)\"' >> /etc/profile.d/rbenv.sh
         source /etc/profile.d/rbenv.sh
     EOC
